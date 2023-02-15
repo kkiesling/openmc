@@ -132,6 +132,9 @@ void get_run_parameters(pugi::xml_node node_base)
 {
   using namespace settings;
   using namespace pugi;
+  std::cout << "getting run params" << std::endl;
+  node_base.print(std::cout);
+  std::cout << "should have printed the node above this" << std::endl;
 
   // Check number of particles
   if (!check_for_node(node_base, "particles")) {
@@ -221,6 +224,7 @@ void read_settings_xml()
   using namespace pugi;
   // Check if settings.xml exists
   std::string filename = settings::path_input + "settings.xml";
+  std::cout << filename << std::endl;
   if (!file_exists(filename)) {
     if (run_mode != RunMode::PLOTTING) {
       fatal_error(

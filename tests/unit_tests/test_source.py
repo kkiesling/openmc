@@ -6,6 +6,7 @@ import openmc.stats
 import numpy as np
 from pytest import approx
 
+import subprocess
 
 def test_source():
     space = openmc.stats.Point()
@@ -124,7 +125,10 @@ def test_rejection(run_in_tmpdir):
 
     # Load up model via openmc.lib and sample source
     model.export_to_xml()
+    subprocess.call(["cat", "settings.xml"])
+    print("before init")
     openmc.lib.init()
+    print("after init")
     particles = openmc.lib.sample_external_source(1000)
 
     # Make sure that all sampled sources are within one of the spheres
